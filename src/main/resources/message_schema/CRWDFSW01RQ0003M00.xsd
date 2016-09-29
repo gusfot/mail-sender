@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <!-- Author : IT표준화 황진광
+       DATE : 2015.11.20 -->
+  <xs:include schemaLocation="NMI_REQ_HEADER.xsd"/>
+  <xs:element name="CRWDFSW01RQ0003M00">
+    <!-- NMI 헤더 -->
+    <xs:complexType>
+      <!-- 크라우드펀딩 계좌유효성 확인 결과 요청 -->
+      <xs:complexContent>
+
+        <xs:extension base="NMI_REQ_HEADER">
+          <xs:sequence>
+
+            <xs:element name="RQ_ACOPNO" minOccurs="1">
+              <xs:simpleType>
+                <!-- 요청계좌개설자번호 -->
+                <xs:restriction base="xs:integer">
+                  <xs:totalDigits value="6"/>
+                  <xs:whiteSpace value="collapse"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+
+            <xs:element name="RQ_ACOPSEQ" minOccurs="1">
+              <xs:simpleType>
+                <!-- 요청계좌개설일련번호 -->
+                <xs:restriction base="xs:string">
+                  <xs:maxLength value="4"/>
+                  <xs:whiteSpace value="collapse"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+
+            <xs:element name="REQ_SEQ" minOccurs="1">
+              <!-- 요청일련번호 -->
+              <xs:simpleType>
+                <xs:restriction base="xs:integer">
+                  <xs:totalDigits value="10"/>
+                  <xs:whiteSpace value="collapse"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+
+            <xs:element name="SUBS_ASK_PROC_DT" minOccurs="1">
+              <!-- 청약신청처리일자  -->
+              <xs:simpleType>
+                <xs:restriction base="xs:integer">
+                  <xs:totalDigits value="10"/>
+                  <xs:whiteSpace value="collapse"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+
+
+            <xs:element name="SUBS_ASK_PROC_SEQ" minOccurs="1">
+              <!-- 청약신청처리일련번호  -->
+              <xs:simpleType>
+                <xs:restriction base="xs:integer">
+                  <xs:totalDigits value="10"/>
+                  <xs:whiteSpace value="collapse"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+
+			<xs:element name="VERSION" type="xs:string" fixed="1.3"/>
+
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

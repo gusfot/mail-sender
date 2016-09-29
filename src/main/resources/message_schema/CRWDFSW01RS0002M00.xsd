@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- 작성일 : 2015.10.22
+     작성자 : IT표준화팀 황진광 -->
+<xs:schema 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:include schemaLocation="NMI_RES_HEADER.xsd"/>  
+  <xs:element name="CRWDFSW01RS0002M00">    
+    <!-- NMI 헤더 -->
+    <xs:complexType>
+      <!-- 크라우드펀딩 투자자 투자한도 요청 -->     
+      <xs:complexContent>
+        
+        <xs:extension base="NMI_RES_HEADER">
+          <xs:sequence>
+
+            <xs:element name="RQ_ACOPNO" minOccurs="1">
+              <xs:simpleType>
+                <!-- 요청계좌개설자번호 -->
+                <xs:restriction base="xs:integer">
+                  <xs:totalDigits value="6"/>
+                  <xs:whiteSpace value="collapse"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+
+            <xs:element name="RQ_ACOPSEQ" minOccurs="1">
+              <xs:simpleType>
+                <!-- 요청계좌개설일련번호 -->
+                <xs:restriction base="xs:string">
+                  <xs:maxLength value="4"/>
+                  <xs:whiteSpace value="collapse"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+
+            <xs:element name="REQ_SEQ" minOccurs="1">
+              <!-- 요청일련번호 -->
+              <xs:simpleType>
+                <xs:restriction base="xs:integer">
+                  <xs:totalDigits value="10"/>
+                  <xs:whiteSpace value="collapse"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+
+            <xs:element name="REPL_SEQ" minOccurs="1">
+              <!-- 응답일련번호 -->
+              <xs:simpleType>
+                <xs:restriction base="xs:integer">
+                  <xs:totalDigits value="10"/>
+                  <xs:whiteSpace value="collapse"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+
+            <xs:element name="REPL_DT" minOccurs="1">
+              <!-- 응답일자 -->
+              <xs:simpleType>
+                <xs:restriction base="xs:integer">
+                  <xs:totalDigits value="8"/>
+                  <xs:whiteSpace value="collapse"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+            
+            <xs:element name="ASK_RESULT_CD" minOccurs="1">
+              <!-- 결과 -->
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:maxLength value="4"/>
+                  <xs:whiteSpace value="collapse"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+            <xs:element name="VERSION" type="xs:string" fixed="1.3"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
