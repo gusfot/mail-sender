@@ -1,0 +1,6 @@
+### IBK \uC804\uBB38 \uB514\uB809\uD1A0\uB9AC
+ibk.msg.senddata.dir=/home/ibkuser/senddata
+ibk.msg.recvdata.dir=/home/ibkuser/recvdata
+
+ibk.socket.host.ip=203.235.70.167
+ibk.socket.host.port=11311

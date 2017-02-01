@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:task="http://www.springframework.org/schema/task"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		                   http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd">
+
+	
+	<task:scheduled-tasks>
+		
+		<!-- 주금모집기업 정보 (와디즈→기업은행)(0100) 스케쥴러 -->
+		<task:scheduled ref="offerIfInfoBatchScheduler" 				method="run" 	cron="0 31 18 * * ?" />
+		
+		<!-- 청약결과 투자자입금정보(와디즈→기업은행)(0200) 스케쥴러 -->
+		<task:scheduled ref="investIfInfoRealtimeBatchScheduler"		method="run" 	cron="0 32 18 * * ?" />
+		
+		<!-- 영업일 등록 스케쥴러 -->
+		<task:scheduled ref="ibkBatchWorkingDayScheduler"				method="run" 	cron="0 30 18 * * ?" />
+		
+		<!-- 청약결과 투자자입금정보 수기(와디즈→기업은행)(0220) 스케쥴러 -->
+		<task:scheduled ref="investIfInfoAccountBatchScheduler" 		method="run" 	cron="0 17 1 * * ?" />
+		
+		<task:scheduled ref="investIfInfoResultBatchScheduler" 			method="run" 	cron="0 7 12 * * ?" />
+		
+		<task:scheduled ref="ibkRefundScheduler" 						method="run" 	cron="30 0/1 * * * ?" />
+		
+		<task:scheduled ref="ibkPollingClientScheduler"					method="run" 	cron="0 0/1 * * * ?" />
+		
+	</task:scheduled-tasks>
+	
+</beans>

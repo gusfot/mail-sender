@@ -64,7 +64,7 @@
         <appender-ref ref="FILE" />
     </logger>
     
-    <root level="DEBUG" additivity="false">
+    <root level="DEBUG">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="TIME_BASED_FILE" />
     </root>
