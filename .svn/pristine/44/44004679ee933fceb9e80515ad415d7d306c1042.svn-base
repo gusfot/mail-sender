@@ -1,2 +1,0 @@
-1. 프로젝트 빌드  (mvn빌드): clean package install -P product
- - 개발환경에 따라 운영(product), 개발(dev), 로컬(local) 

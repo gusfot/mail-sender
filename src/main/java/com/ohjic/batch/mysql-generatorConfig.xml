@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration >
+<!-- mysql setting  -->
+<!-- <classPathEntry location="C:\Users\hyunlae\.m2\repository\mysql\mysql-connector-java\5.1.36\mysql-connector-java-5.1.36.jar" /> -->
+<classPathEntry location="C:\Users\ohjic\.m2\repository\org\mariadb\jdbc\mariadb-java-client\1.4.6\mariadb-java-client-1.4.6.jar" />
+
+
+	<context id="context1" >
+   
+    <jdbcConnection driverClass="org.mariadb.jdbc.Driver" connectionURL="jdbc:mariadb://storage.qfun.kr:3306/batch" userId="ohmail" password="!ohjic00" />
+    <javaModelGenerator  targetPackage="com.ohjic.batch.model" targetProject="com.ohjic.batch" />
+    <sqlMapGenerator     targetPackage="com.ohjic.batch.persistence.mapper" targetProject="com.ohjic.batch" />
+    <javaClientGenerator targetPackage="com.ohjic.batch.persistence" targetProject="com.ohjic.batch" type="XMLMAPPER" />
+   
+	<table  tableName="msg_queue" domainObjectName="MsgQueue" 
+   																			 enableSelectByPrimaryKey="true"
+   																			 enableUpdateByPrimaryKey="true"
+   																			 enableSelectByExample="false" 
+	   																		 enableDeleteByExample="false" 
+	   																		 enableCountByExample="false" 
+	   																		 enableUpdateByExample="false">
+   	  
+      <columnOverride column="mseq" property="mseq" />
+      <columnOverride column="dstaddr" property="dstaddr" />
+      <columnOverride column="callback" property="callback" />
+      <columnOverride column="text" property="text" />
+      <columnOverride column="insert_time" property="insertTime" />
+      <columnOverride column="request_time" property="requestTime" />
+      <columnOverride column="report_time" property="reportTime" />
+      <columnOverride column="send_time" property="sendTime" />
+      <columnOverride column="tcprecv_time" property="tcprecvTime" />
+      <columnOverride column="save_time" property="saveTime" />
+      <columnOverride column="stat" property="stat" />
+      <columnOverride column="readreply" property="readreply" />
+      <columnOverride column="result" property="result" />
+      <columnOverride column="repcnt" property="repcnt" />
+      <columnOverride column="telecom" property="telecom" />
+      <columnOverride column="subject" property="subject" />
+      <columnOverride column="fileloc1" property="fileloc1" />
+      <columnOverride column="fileloc2" property="fileloc2" />
+      <columnOverride column="fileloc3" property="fileloc3" />
+      <columnOverride column="fileloc4" property="fileloc4" />
+      <columnOverride column="fileloc5" property="fileloc5" />
+      <columnOverride column="filesize1" property="filesize1" />
+      <columnOverride column="filesize2" property="filesize2" />
+      <columnOverride column="filesize3" property="filesize3" />
+      <columnOverride column="filesize4" property="filesize4" />
+      <columnOverride column="filesize5" property="filesize5" />
+      <columnOverride column="filecnt_checkup" property="filecntCheckup" />
+      <columnOverride column="msg_type" property="msgType" />
+      <columnOverride column="server_id" property="serverId" />
+      <columnOverride column="ext_col0" property="extCol0" />
+      <columnOverride column="ext_col1" property="extCol1" />
+      <columnOverride column="ext_col2" property="extCol2" />
+      <columnOverride column="ext_col3" property="extCol3" />
+      <columnOverride column="send_type" property="sendType" />
+      <columnOverride column="dkey" property="dkey" />
+      <columnOverride column="dcnt" property="dcnt" />
+      <columnOverride column="text_type" property="textType" />
+      <columnOverride column="expiretime" property="expiretime" />
+      <columnOverride column="filecnt" property="filecnt" />
+      <columnOverride column="opt_id" property="optId" />
+      <columnOverride column="opt_cmp" property="optCmp" />
+      <columnOverride column="opt_post" property="optPost" />
+      <columnOverride column="opt_name" property="optName" />
+      <columnOverride column="msg_charge_idx" property="msgChargeIdx" />
+      <columnOverride column="msg_tag" property="msgTag" />
+      <columnOverride column="member_IDX" property="memberIdx" />
+      <columnOverride column="point_log_idx" property="pointLogIdx" />
+      <columnOverride column="refunded" property="refunded" />
+      <columnOverride column="dstaddr_user" property="dstaddrUser" />
+      <columnOverride column="callback_user" property="callbackUser" />
+      <columnOverride column="password" property="password" />
+      <columnOverride column="is_auth" property="isAuth" />
+      
+	</table>
+	
+	
+   <table  tableName="msg_result" domainObjectName="MsgResult" 
+   																			 enableSelectByPrimaryKey="true"
+   																			 enableUpdateByPrimaryKey="true"
+   																			 enableSelectByExample="false" 
+	   																		 enableDeleteByExample="false" 
+	   																		 enableCountByExample="false" 
+	   																		 enableUpdateByExample="false">
+   	  
+      <columnOverride column="mseq" property="mseq" />
+      <columnOverride column="dstaddr" property="dstaddr" />
+      <columnOverride column="callback" property="callback" />
+      <columnOverride column="text" property="text" />
+      <columnOverride column="insert_time" property="insertTime" />
+      <columnOverride column="request_time" property="requestTime" />
+      <columnOverride column="report_time" property="reportTime" />
+      <columnOverride column="send_time" property="sendTime" />
+      <columnOverride column="tcprecv_time" property="tcprecvTime" />
+      <columnOverride column="save_time" property="saveTime" />
+      <columnOverride column="stat" property="stat" />
+      <columnOverride column="readreply" property="readreply" />
+      <columnOverride column="result" property="result" />
+      <columnOverride column="repcnt" property="repcnt" />
+      <columnOverride column="telecom" property="telecom" />
+      <columnOverride column="subject" property="subject" />
+      <columnOverride column="fileloc1" property="fileloc1" />
+      <columnOverride column="fileloc2" property="fileloc2" />
+      <columnOverride column="fileloc3" property="fileloc3" />
+      <columnOverride column="fileloc4" property="fileloc4" />
+      <columnOverride column="fileloc5" property="fileloc5" />
+      <columnOverride column="filesize1" property="filesize1" />
+      <columnOverride column="filesize2" property="filesize2" />
+      <columnOverride column="filesize3" property="filesize3" />
+      <columnOverride column="filesize4" property="filesize4" />
+      <columnOverride column="filesize5" property="filesize5" />
+      <columnOverride column="filecnt_checkup" property="filecntCheckup" />
+      <columnOverride column="msg_type" property="msgType" />
+      <columnOverride column="server_id" property="serverId" />
+      <columnOverride column="ext_col0" property="extCol0" />
+      <columnOverride column="ext_col1" property="extCol1" />
+      <columnOverride column="ext_col2" property="extCol2" />
+      <columnOverride column="ext_col3" property="extCol3" />
+      <columnOverride column="send_type" property="sendType" />
+      <columnOverride column="dkey" property="dkey" />
+      <columnOverride column="dcnt" property="dcnt" />
+      <columnOverride column="text_type" property="textType" />
+      <columnOverride column="expiretime" property="expiretime" />
+      <columnOverride column="filecnt" property="filecnt" />
+      <columnOverride column="opt_id" property="optId" />
+      <columnOverride column="opt_cmp" property="optCmp" />
+      <columnOverride column="opt_post" property="optPost" />
+      <columnOverride column="opt_name" property="optName" />
+      <columnOverride column="msg_charge_idx" property="msgChargeIdx" />
+      <columnOverride column="msg_tag" property="msgTag" />
+      <columnOverride column="member_IDX" property="memberIdx" />
+      <columnOverride column="point_log_idx" property="pointLogIdx" />
+      <columnOverride column="refunded" property="refunded" />
+      
+	</table>
+	
+   <table  tableName="msg_queue_block" domainObjectName="MsgQueueBlock" 
+   																			 enableSelectByPrimaryKey="true"
+   																			 enableUpdateByPrimaryKey="true"
+   																			 enableSelectByExample="false" 
+	   																		 enableDeleteByExample="false" 
+	   																		 enableCountByExample="false" 
+	   																		 enableUpdateByExample="false">
+   	  
+      <columnOverride column="dstaddr" property="dstaddr" />
+      <columnOverride column="msg_type" property="msgType" />
+      <columnOverride column="callback" property="callback" />
+      <columnOverride column="reg_time" property="regTime" />
+      <columnOverride column="memo" property="memo" />
+      
+	</table>	
+	
+  </context>
+</generatorConfiguration>

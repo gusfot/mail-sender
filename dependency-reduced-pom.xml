@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.wadiz</groupId>
-  <artifactId>wadiz.client-ibk</artifactId>
+  <groupId>com.ohjic</groupId>
+  <artifactId>ohjic.batch</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <build>
     <resources>
@@ -55,7 +55,7 @@
           <archive>
             <index>true</index>
             <manifest>
-              <mainClass>com.wadiz.client.ibk.rt.tx.${app.name}</mainClass>
+              <mainClass>com.ohjic.batch.App</mainClass>
               <addClasspath>true</addClasspath>
               <classpathPrefix>lib/</classpathPrefix>
             </manifest>
@@ -154,7 +154,7 @@
     <slf4j.version>1.7.5</slf4j.version>
     <junit.version>4.11</junit.version>
     <java.version>1.7</java.version>
-    <deploy.target.dir>d:/com.wadiz.client.ibk</deploy.target.dir>
+    <deploy.target.dir>c:/com.ohjic.batch</deploy.target.dir>
     <maven.test.skip>true</maven.test.skip>
     <spring-framework.version>3.2.3.RELEASE</spring-framework.version>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
