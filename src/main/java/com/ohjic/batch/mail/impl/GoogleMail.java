@@ -21,8 +21,14 @@ public class GoogleMail implements Mailer {
 	private static final Logger logger = LoggerFactory.getLogger(GoogleMail.class);
 	
 	@Override
-	public boolean send(String to, String toName, String from, String fromName, String Subject, String text,
-			String msgType) throws UnsupportedEncodingException, MessagingException {
+	public boolean send(String to, String toName, String from, String fromName, String password, boolean isAuth, String subject, String text)
+			throws UnsupportedEncodingException, MessagingException {
+				return false;
+		
+	}
+	@Override
+	public boolean send(String to, String toName, String from, String fromName, boolean isAuth, String subject, String text)
+			throws UnsupportedEncodingException, MessagingException {
 
 			boolean result = false;
 			
@@ -60,7 +66,7 @@ public class GoogleMail implements Mailer {
 	         message.addRecipient(Message.RecipientType.TO, new InternetAddress(to, toName));
 
 	         // Set Subject: header field
-	         message.setSubject(Subject);
+	         message.setSubject(subject);
 
 	         // Now set the actual message
 	         message.setText(text);

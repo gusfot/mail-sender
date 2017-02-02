@@ -6,6 +6,9 @@ import javax.mail.MessagingException;
 
 public interface Mailer {
 
-	boolean send(String to, String toName, String from, String fromName, String msgType, String Subject, String text)
+	boolean send(String to, String toName, String from, String fromName, boolean isAuth, String Subject, String text)
 			throws UnsupportedEncodingException, MessagingException;
+
+	boolean send(String to, String toName, String from, String fromName, String password, boolean isAuth,
+			String subject, String text) throws UnsupportedEncodingException, MessagingException;
 }

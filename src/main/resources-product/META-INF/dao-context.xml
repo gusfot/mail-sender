@@ -11,7 +11,7 @@
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 	  <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-	  <property name="url" value="jdbc:mysql://storage.ohjic.com:3306/email?useUnicode=true&amp;connectionCollation=utf8mb4_unicode_ci&amp;allowMultiQueries=true&amp;autoReconnect=true" />
+	  <property name="url" value="jdbc:mysql://storage.ohjic.com:3306/batch?useUnicode=true&amp;connectionCollation=utf8mb4_unicode_ci&amp;allowMultiQueries=true&amp;autoReconnect=true" />
 	  <property name="username" value="ohmail" />
 	  <property name="password" value="!ohjic00" />
 	</bean>

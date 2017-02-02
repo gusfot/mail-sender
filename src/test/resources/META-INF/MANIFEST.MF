@@ -1,1 +1,1 @@
-Main-class: com.ohjic.batch.ibk.tx.IbkTxClient
+Main-class: com.ohjic.batch.App

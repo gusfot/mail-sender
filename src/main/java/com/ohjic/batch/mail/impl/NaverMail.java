@@ -14,8 +14,15 @@ public class NaverMail implements Mailer {
 	private static final Logger logger = LoggerFactory.getLogger(NaverMail.class);
 	
 	@Override
-	public boolean send(String to, String toName, String from, String fromName, String msgType, String Subject,
-			String text) throws UnsupportedEncodingException, MessagingException {
+	public boolean send(String to, String toName, String from, String fromName, boolean isAuth, String subject, String text)
+			throws UnsupportedEncodingException, MessagingException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean send(String to, String toName, String from, String fromName, String password, boolean isAuth,
+			String subject, String text) throws UnsupportedEncodingException, MessagingException {
 		// TODO Auto-generated method stub
 		return false;
 	}

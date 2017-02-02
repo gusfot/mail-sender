@@ -21,7 +21,8 @@ public class OhjicSendEmail implements Mailer {
 	private static final Logger logger = LoggerFactory.getLogger(OhjicSendEmail.class);
 	
 	@Override
-	public boolean send(String to, String toName, String from, String fromName, String msgType, String subject, String text) throws UnsupportedEncodingException, MessagingException {
+	public boolean send(String to, String toName, String from, String fromName, boolean isAuth, String subject, String text)
+			throws UnsupportedEncodingException, MessagingException {
 
         // Assuming you are sending email from localhost
         String host = OhjicConfig.get("smtp.server.ip");;
@@ -113,4 +114,12 @@ public class OhjicSendEmail implements Mailer {
        System.out.println("Sent message successfully....");
 
     }
+
+
+	@Override
+	public boolean send(String to, String toName, String from, String fromName, String password, boolean isAuth,
+			String subject, String text) throws UnsupportedEncodingException, MessagingException {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

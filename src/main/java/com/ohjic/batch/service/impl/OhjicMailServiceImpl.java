@@ -51,8 +51,7 @@ public class OhjicMailServiceImpl implements MailService {
 			try {
 				
 				Mailer mailer = MailFatory.getInstance(isAuth , from);
-				sendResult =  mailer.send(msgQueue.getDstaddr(), "받는사람", msgQueue.getCallback(), "보내는사람", "1", msgQueue.getSubject()
-						, msgQueue.getText());
+				sendResult =  mailer.send(msgQueue.getDstaddr(), msgQueue.getDstaddrUser(), msgQueue.getCallback(), msgQueue.getCallbackUser(), isAuth, msgQueue.getSubject() , msgQueue.getText());
 				
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
