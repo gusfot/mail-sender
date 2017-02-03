@@ -8,10 +8,10 @@
     </appender>
 	 
 	 <appender name="TIME_BASED_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-	    <file>/subdata/application/com.ohjic.batch/logs/ohjic_batch.log</file>
+	    <file>../logs/ohjic_batch.log</file>
 	    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">        
 	        <!-- daily rollover -->
-	        <fileNamePattern>/subdata/application/ohjic_batch/logs/ohjic_batch.%d{yyyy-MM-dd}.log</fileNamePattern>
+	        <fileNamePattern>../logs/ohjic_batch.%d{yyyy-MM-dd}.log</fileNamePattern>
 	        <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>100MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
@@ -24,10 +24,10 @@
 	</appender>   
 	
 		 <appender name="TIME_BASED_ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-	    <file>/subdata/application/com.ohjic.batch/logs/ohjic_batch_error.log</file>
+	    <file>../logs/ohjic_batch_error.log</file>
 	    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">        
 	        <!-- daily rollover -->
-	        <fileNamePattern>/subdata/application/com.ohjic.batch/logs/ohjic_batch.%d{yyyy-MM-dd}.log</fileNamePattern>
+	        <fileNamePattern>../logs/ohjic_batch.%d{yyyy-MM-dd}.log</fileNamePattern>
 	        <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>100MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>

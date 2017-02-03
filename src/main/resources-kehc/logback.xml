@@ -8,10 +8,10 @@
     </appender>
 	 
 	 <appender name="TIME_BASED_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-	    <file>../logs/ohjic-sender.log</file>
+	    <file>/app/com.ohjic.batch.ibk/logs/ibk-client.log</file>
 	    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">        
 	        <!-- daily rollover -->
-	        <fileNamePattern>../logs/ohjic-sender.%d{yyyy-MM-dd-HH}.log</fileNamePattern>
+	        <fileNamePattern>/app/com.ohjic.batch.ibk/logs/ibk-client.%d{yyyy-MM-dd}.log</fileNamePattern>
 	        <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>100MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
@@ -19,16 +19,15 @@
 	    </rollingPolicy>
 	 
 	    <encoder>
-	        <!-- <pattern>%relative [%thread] %-5level %logger{35} - %msg%n</pattern> -->
 	        <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
 	    </encoder>
 	</appender>   
 	
 		 <appender name="TIME_BASED_ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-	    <file>../logs/ohjic-sender_error.log</file>
+	    <file>/app/com.ohjic.batch.ibk/logs/ibk-client_error.log</file>
 	    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">        
 	        <!-- daily rollover -->
-	        <fileNamePattern>../logs/ohjic-sender_error.%d{yyyy-MM-dd-HH}.log</fileNamePattern>
+	        <fileNamePattern>/app/com.ohjic.batch.ibk/logs/ibk-client_error.%d{yyyy-MM-dd}.log</fileNamePattern>
 	        <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>100MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
@@ -36,13 +35,12 @@
 	    </rollingPolicy>
 	 
 	    <encoder>
-	        <!-- <pattern>%relative [%thread] %-5level %logger{35} - %msg%n</pattern> -->
 	        <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
 	    </encoder>
 	</appender> 
 
 	   
-	<logger name="java.sql.Connection" level="DEBUG">
+	<logger name="java.sql.Connection" level="DEBUG" additivity="false">
 		<appender-ref ref="STDOUT" />
 		<appender-ref ref="TIME_BASED_FILE" />
 	</logger>
@@ -56,17 +54,22 @@
 		<appender-ref ref="TIME_BASED_FILE" />
 	</logger>
 	 
-	<logger name="com.ohjic" level="DEBUG" additivity="false">
+	<logger name="com.ohjic.batch" level="DEBUG" additivity="false">
 		<appender-ref ref="STDOUT" />
 		<appender-ref ref="TIME_BASED_FILE" />
 	</logger>
 
+	<logger name="org.springframework" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
+    </logger>
+    
     <root level="DEBUG">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="TIME_BASED_FILE" />
     </root>
     
-    <root level="ERROR">
+    <root level="ERROR" >
         <appender-ref ref="STDOUT" />
         <appender-ref ref="TIME_BASED_FILE" />
         <appender-ref ref="TIME_BASED_ERROR_FILE" />
