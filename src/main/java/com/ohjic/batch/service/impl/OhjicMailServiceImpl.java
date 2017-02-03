@@ -10,12 +10,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ohjic.batch.common.UnkownSmtpHostException;
 import com.ohjic.batch.common.helper.Mailer;
 import com.ohjic.batch.mail.impl.MailFatory;
 import com.ohjic.batch.model.MsgQueue;
 import com.ohjic.batch.persistence.MsgQueueMapper;
+import com.ohjic.batch.persistence.MsgResultMapper;
 import com.ohjic.batch.service.MailService;
 
 /**
@@ -31,6 +33,9 @@ public class OhjicMailServiceImpl implements MailService {
 	@Autowired
 	private MsgQueueMapper msgQueueMappepr;
 	
+	@Autowired
+	private MsgResultMapper msgResultMapper;
+	
 	@Override
 	public void send() {
 		
@@ -44,6 +49,8 @@ public class OhjicMailServiceImpl implements MailService {
 			
 			String from = msgQueue.getCallback();
 			String to = msgQueue.getDstaddr();
+			Integer mseq = msgQueue.getMseq();
+					
 			logger.debug("보내는 사람:" + from +", 받는사람: " + to);
 			
 			boolean sendResult =false;
@@ -66,7 +73,7 @@ public class OhjicMailServiceImpl implements MailService {
 			}finally {
 				
 				// 완료처리
-				toComplete(msgQueue, sendResult);
+				toComplete(mseq, sendResult);
 			}
 		}
 		
@@ -88,14 +95,16 @@ public class OhjicMailServiceImpl implements MailService {
 	 * @param msgQueue
 	 * @param sendResult
 	 */
-	private void toComplete(MsgQueue msgQueue, boolean sendResult) {
-		MsgQueue completed = new MsgQueue();
-		completed.setMseq(msgQueue.getMseq());
+	@Transactional
+	private void toComplete(Integer mseq, boolean sendResult) {
+
+		MsgQueue completed = msgQueueMappepr.selectByPrimaryKey(mseq );
 		completed.setStat("2");
 		completed.setTcprecvTime(new Date());
 		completed.setResult(sendResult ? "0000":"9999");
+		msgResultMapper.insertSelectiveMsgQueue(completed);
 		
-		msgQueueMappepr.updateByPrimaryKeySelective(completed);
+		msgQueueMappepr.deleteByPrimaryKey(mseq);
 	}
 
 	/**

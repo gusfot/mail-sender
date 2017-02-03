@@ -27,7 +27,7 @@
 		<!-- Maven test skip -->
 		<maven.test.skip>true</maven.test.skip>
 		
-		<deploy.target.dir>c:/com.ohjic.batch</deploy.target.dir>
+		<deploy.target.dir>c:/com.ohjic.batch/${env}</deploy.target.dir>
 
 	</properties>
 	

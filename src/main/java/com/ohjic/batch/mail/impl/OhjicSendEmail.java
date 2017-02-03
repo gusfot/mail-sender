@@ -123,7 +123,7 @@ public class OhjicSendEmail implements Mailer {
 	       if("1".equals(textType)) {
 		       message.setText(text);
 	       }else {
-		       message.setContent(text, "text/html");
+		       message.setContent(text, "text/html; charset=UTF-8");
 	       }
 	       
 	       // 메일 전송

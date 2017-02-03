@@ -1,5 +1,6 @@
 package com.ohjic.batch.persistence;
 
+import com.ohjic.batch.model.MsgQueue;
 import com.ohjic.batch.model.MsgResult;
 
 public interface MsgResultMapper {
@@ -45,4 +46,6 @@ public interface MsgResultMapper {
 	 * @mbg.generated  Thu Feb 02 16:28:25 KST 2017
 	 */
 	int updateByPrimaryKey(MsgResult record);
+
+	int insertSelectiveMsgQueue(MsgQueue msgQueue);
 }
