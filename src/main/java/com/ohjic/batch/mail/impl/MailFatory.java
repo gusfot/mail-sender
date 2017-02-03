@@ -7,13 +7,13 @@ public class MailFatory {
 
 	private static Mailer instance = null;
 
-	public static Mailer getInstance(boolean isAuth, String from) throws UnkownSmtpHostException {
+	public static Mailer getInstance(String isAuth, String from) throws UnkownSmtpHostException {
 		
 		String domain = from.substring(from.indexOf("@")+1);
 		
 		System.out.println("domain: " + domain);
 		
-		if(isAuth) {
+		if("1".equals(isAuth)) {
 			if("gmail.com".equals(domain)) {
 				instance = new GoogleMail();
 			}else if("naver.com".equals(domain)) {

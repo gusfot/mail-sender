@@ -1,6 +1,7 @@
 package com.ohjic.batch.service.impl;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -39,19 +40,19 @@ public class OhjicMailServiceImpl implements MailService {
 		for (MsgQueue msgQueue : readyList) {
 			
 			// 전송 중 상태로 변경
-			modifyToReady(msgQueue);
+			toReady(msgQueue);
 			
 			String from = msgQueue.getCallback();
 			String to = msgQueue.getDstaddr();
 			logger.debug("보내는 사람:" + from +", 받는사람: " + to);
 			
-			boolean isAuth = true;
 			boolean sendResult =false;
 			
 			try {
 				
-				Mailer mailer = MailFatory.getInstance(isAuth , from);
-				sendResult =  mailer.send(msgQueue.getDstaddr(), msgQueue.getDstaddrUser(), msgQueue.getCallback(), msgQueue.getCallbackUser(), isAuth, msgQueue.getSubject() , msgQueue.getText());
+				String isAuth = msgQueue.getIsAuth();
+				Mailer mailer = MailFatory.getInstance(isAuth  , from);
+				sendResult =  mailer.send(msgQueue.getDstaddr(), msgQueue.getDstaddrUser(), msgQueue.getCallback(), msgQueue.getCallbackUser(), msgQueue.getPassword(), msgQueue.getIsAuth(), msgQueue.getSubject() , msgQueue.getText(), msgQueue.getTextType());
 				
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
@@ -65,7 +66,7 @@ public class OhjicMailServiceImpl implements MailService {
 			}finally {
 				
 				// 완료처리
-				modifyCompleted(msgQueue, sendResult);
+				toComplete(msgQueue, sendResult);
 			}
 		}
 		
@@ -74,10 +75,11 @@ public class OhjicMailServiceImpl implements MailService {
 	 * 전송상태로 변경
 	 * @param msgQueue
 	 */
-	private void modifyToReady(MsgQueue msgQueue) {
+	private void toReady(MsgQueue msgQueue) {
 		MsgQueue ready = new MsgQueue();
 		ready.setMseq(msgQueue.getMseq());
 		ready.setStat("1");
+		ready.setSendTime(new Date());
 		msgQueueMappepr.updateByPrimaryKeySelective(ready);
 	}
 
@@ -86,10 +88,11 @@ public class OhjicMailServiceImpl implements MailService {
 	 * @param msgQueue
 	 * @param sendResult
 	 */
-	private void modifyCompleted(MsgQueue msgQueue, boolean sendResult) {
+	private void toComplete(MsgQueue msgQueue, boolean sendResult) {
 		MsgQueue completed = new MsgQueue();
 		completed.setMseq(msgQueue.getMseq());
 		completed.setStat("2");
+		completed.setTcprecvTime(new Date());
 		completed.setResult(sendResult ? "0000":"9999");
 		
 		msgQueueMappepr.updateByPrimaryKeySelective(completed);
@@ -102,6 +105,31 @@ public class OhjicMailServiceImpl implements MailService {
 	private List<MsgQueue> getReadyMailList() {
 		String stat = "0";
 		return msgQueueMappepr.selectMsgQueueListByStat(stat );
+	}
+	
+	
+	@Override
+	public Object regist(String from, String fromName,String to, String toName, String subject, String textType, String text, String serverId, Date requestTime, String password   ) {
+		
+		MsgQueue mq = new MsgQueue();
+		mq.setSendType("1");					// 1:비동보, 2:동부
+		mq.setDstaddr(from);					// 수신자 이메일 주소, 동보시 미참조
+		mq.setDstaddrUser(fromName);			// 수신자 이름
+		mq.setCallback(to);						// 수신자 이메일 주소, 동보시 미참조
+		mq.setCallbackUser(toName);				// 발신자 이름
+		mq.setStat("0");						// 0:전송대기, 1:송신중, 2:송신완료, 3:결과수신
+		mq.setSubject(subject);					// 이메일 제목
+		mq.setTextType(textType);				// 0:plain, 1:html
+		mq.setText(text);						// 이메일 내용
+		mq.setServerId(serverId);				// 서버 아이디
+		if(requestTime!=null) {
+			mq.setRequestTime(requestTime);		// 요청시간
+		}
+		if(password!=null) {
+			mq.setPassword(password);		// 요청시간
+		}
+		
+		return msgQueueMappepr.insertSelective(mq) == 1;
 	}
 
 }

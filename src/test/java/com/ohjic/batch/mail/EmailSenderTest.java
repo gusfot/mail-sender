@@ -24,16 +24,18 @@ public class EmailSenderTest {
 		
 		try {
 			
-			boolean isAuth=true;
+			String isAuth="0";
 			String to = "gusfot@gmail.com";
 			String toName = "김현래";
 			String from="hyunlae.kim@ohjic.com";
 			String fromName ="김현래";
 			String text ="메일본문";
 			String subject = "메일제목";
-			Mailer emailSender = MailFatory.getInstance(isAuth, "hyunlae.kim@ohjic.com");
+			Mailer emailSender = MailFatory.getInstance(isAuth, from);
+			String textType="0";
 			
-			sendResult = emailSender.send(to, toName, from, fromName, isAuth, subject, text);
+			String password="";
+			sendResult = emailSender.send(to, toName, from, fromName, password, isAuth, subject, text, textType);
 			
 		} catch (UnsupportedEncodingException | MessagingException e) {
 			// TODO Auto-generated catch block
