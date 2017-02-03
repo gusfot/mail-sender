@@ -129,6 +129,12 @@
         <env>product</env>
       </properties>
     </profile>
+    <profile>
+      <id>kehc</id>
+      <properties>
+        <env>kehc</env>
+      </properties>
+    </profile>
   </profiles>
   <dependencies>
     <dependency>
