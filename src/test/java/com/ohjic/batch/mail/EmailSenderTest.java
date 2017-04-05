@@ -25,9 +25,9 @@ public class EmailSenderTest {
 		try {
 			
 			String isAuth="0";
-			String to = "gusfot@gmail.com";
+			String to = "gusfot@naver.com";
 			String toName = "김현래";
-			String from="hyunlae.kim@ohjic.com";
+			String from="gusfot@gmail.com";
 			String fromName ="김현래";
 			String text ="메일본문";
 			String subject = "메일제목";
@@ -35,7 +35,7 @@ public class EmailSenderTest {
 			String textType="0";
 			
 			String password="";
-			sendResult = emailSender.send(to, toName, from, fromName, password, isAuth, subject, text, textType);
+			sendResult = emailSender.send(to, toName, from, fromName, password, isAuth, subject, text, textType, null);
 			
 		} catch (UnsupportedEncodingException | MessagingException e) {
 			// TODO Auto-generated catch block

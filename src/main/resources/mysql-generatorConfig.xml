@@ -73,6 +73,7 @@
       <columnOverride column="callback_user" property="callbackUser" />
       <columnOverride column="password" property="password" />
       <columnOverride column="is_auth" property="isAuth" />
+      <columnOverride column="is_reserved" property="isReserved" />
       
 	</table>
 	
@@ -137,6 +138,7 @@
       <columnOverride column="callback_user" property="callbackUser" />
       <columnOverride column="password" property="password" />
       <columnOverride column="is_auth" property="isAuth" />
+      <columnOverride column="is_reserved" property="isReserved" />
       
 	</table>
 	<!-- 
