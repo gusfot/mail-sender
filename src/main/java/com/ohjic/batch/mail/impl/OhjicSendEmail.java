@@ -1,14 +1,22 @@
 package com.ohjic.batch.mail.impl;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 import java.util.Properties;
 
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Multipart;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,6 +74,27 @@ public class OhjicSendEmail implements Mailer {
 		       message.setContent(text, "text/html");
 	       }
 	       
+	       
+	    // Create the message part
+	         BodyPart messageBodyPart = new MimeBodyPart();
+
+	         // Now set the actual message
+	         messageBodyPart.setText("This is message body");
+	         
+	        // Create a multipar message
+	         Multipart multipart = new MimeMultipart();
+
+	         // Set text message part
+	         multipart.addBodyPart(messageBodyPart);
+
+	         // Part two is attachment
+	         messageBodyPart = new MimeBodyPart();
+	         String filename = "C:/eula.1033.txt";
+	         DataSource source = new FileDataSource(filename);
+	         messageBodyPart.setDataHandler(new DataHandler(source));
+	         messageBodyPart.setFileName(filename);
+	         multipart.addBodyPart(messageBodyPart);
+	         
 	       // 메일 전송
 	       Transport.send(message);
 	       logger.info("Sent message successfully....");
@@ -82,7 +111,7 @@ public class OhjicSendEmail implements Mailer {
 	
 	@Override
 	public boolean send(String to, String toName, String from, String fromName, String password, String isAuth,
-			String subject, String text, String textType) throws UnsupportedEncodingException, MessagingException {
+			String subject, String text, String textType, List<String> fileList) throws UnsupportedEncodingException, MessagingException {
 		
 		boolean result = false;
         // Assuming you are sending email from localhost
@@ -119,12 +148,38 @@ public class OhjicSendEmail implements Mailer {
 	       // 메일제목
 	       message.setSubject(subject);
 	
-	       // 메일내용 타입 구분(1:html, 0:text)
-	       if("1".equals(textType)) {
-		       message.setText(text);
-	       }else {
-		       message.setContent(text, "text/html; charset=UTF-8");
-	       }
+	         // 메일내용 타입 구분(1:html, 0:text)
+//	         if("1".equals(textType)) {
+//	        	 message.setText(text);
+//	         }else {
+//	        	 message.setContent(text, "text/html; charset=UTF-8");
+//	         }
+	       
+	       
+	      // creates body part for the message
+	         MimeBodyPart messageBodyPart = new MimeBodyPart();
+//	         messageBodyPart.setContent(text, "text/html;charset=UTF-8");
+	         
+	         // 메일내용 타입 구분(1:html, 0:text)
+	         if("1".equals(textType)) {
+	        	 messageBodyPart.setText(text);
+	         }else {
+	        	 messageBodyPart.setContent(text, "text/html; charset=UTF-8");
+	         }
+	       
+	         // Create a multipar message
+	         Multipart multipart = new MimeMultipart();
+
+	         // Set text message part
+	         multipart.addBodyPart(messageBodyPart);
+
+	         for (String filename : fileList) {
+	        	 addAttachment(multipart, filename);
+			}
+
+	         // Send the complete message parts
+	         message.setContent(multipart);
+	         
 	       
 	       // 메일 전송
 	       Transport.send(message);
@@ -138,6 +193,23 @@ public class OhjicSendEmail implements Mailer {
 	        e.printStackTrace();
 	  }
        return result;
+	}
+	
+	/**
+	 * 첨부파일 추가
+	 * @param multipart
+	 * @param filename
+	 * @throws MessagingException
+	 */
+	private  void addAttachment(Multipart multipart, String filename) throws MessagingException
+	{
+		String baseDir = OhjicConfig.getString("attach.base.dir");
+	    DataSource source = new FileDataSource(baseDir+filename);
+	    BodyPart messageBodyPart = new MimeBodyPart();        
+	    messageBodyPart.setDataHandler(new DataHandler(source));
+	    String simpleFilename = filename.substring(filename.lastIndexOf("/")+1);
+	    messageBodyPart.setFileName(simpleFilename);
+	    multipart.addBodyPart(messageBodyPart);
 	}
 	
     public static void main(String[] args) throws UnsupportedEncodingException, MessagingException {

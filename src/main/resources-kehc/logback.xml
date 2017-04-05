@@ -8,10 +8,10 @@
     </appender>
 	 
 	 <appender name="TIME_BASED_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-	    <file>/app/com.ohjic.batch.ibk/logs/ibk-client.log</file>
+	    <file>/home/kehc01/ohjic_mail/logs/ohjic-sender.log</file>
 	    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">        
 	        <!-- daily rollover -->
-	        <fileNamePattern>/app/com.ohjic.batch.ibk/logs/ibk-client.%d{yyyy-MM-dd}.log</fileNamePattern>
+	        <fileNamePattern>/home/kehc01/ohjic_mail/logs/ohjic-sender.%d{yyyy-MM-dd}.log</fileNamePattern>
 	        <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>100MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
@@ -24,10 +24,10 @@
 	</appender>   
 	
 		 <appender name="TIME_BASED_ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-	    <file>/app/com.ohjic.batch.ibk/logs/ibk-client_error.log</file>
+	    <file>/home/kehc01/ohjic_mail/logs/ohjic-sender_error.log</file>
 	    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">        
 	        <!-- daily rollover -->
-	        <fileNamePattern>/app/com.ohjic.batch.ibk/logs/ibk-client_error.%d{yyyy-MM-dd}.log</fileNamePattern>
+	        <fileNamePattern>/home/kehc01/ohjic_mail/logs/ohjic-sender_error.%d{yyyy-MM-dd}.log</fileNamePattern>
 	        <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>100MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>

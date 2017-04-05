@@ -1,6 +1,7 @@
 package com.ohjic.batch.service.impl;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -59,7 +60,9 @@ public class OhjicMailServiceImpl implements MailService {
 				
 				String isAuth = msgQueue.getIsAuth();
 				Mailer mailer = MailFatory.getInstance(isAuth  , from);
-				sendResult =  mailer.send(msgQueue.getDstaddr(), msgQueue.getDstaddrUser(), msgQueue.getCallback(), msgQueue.getCallbackUser(), msgQueue.getPassword(), msgQueue.getIsAuth(), msgQueue.getSubject() , msgQueue.getText(), msgQueue.getTextType());
+				
+				List<String> attachFileList = attach(msgQueue);
+				sendResult =  mailer.send(msgQueue.getDstaddr(), msgQueue.getDstaddrUser(), msgQueue.getCallback(), msgQueue.getCallbackUser(), msgQueue.getPassword(), msgQueue.getIsAuth(), msgQueue.getSubject() , msgQueue.getText(), msgQueue.getTextType(), attachFileList);
 				
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
@@ -77,6 +80,37 @@ public class OhjicMailServiceImpl implements MailService {
 			}
 		}
 		
+	}
+	
+	/**
+	 * 파일 첨부
+	 * @param msgQueue
+	 * @return
+	 */
+	private List<String> attach(MsgQueue msgQueue) {
+		List<String> attachFileList = new ArrayList<>();
+		
+		Integer fileCnt = msgQueue.getFilecnt();
+		
+		if(fileCnt>0) {
+			
+			if(msgQueue.getFileloc1() != null) {
+				attachFileList.add(msgQueue.getFileloc1());
+			}
+			if(msgQueue.getFileloc2() != null) {
+				attachFileList.add(msgQueue.getFileloc2());
+			}
+			if(msgQueue.getFileloc3() != null) {
+				attachFileList.add(msgQueue.getFileloc3());
+			}
+			if(msgQueue.getFileloc4() != null) {
+				attachFileList.add(msgQueue.getFileloc4());
+			}
+			if(msgQueue.getFileloc5() != null) {
+				attachFileList.add(msgQueue.getFileloc5());
+			}
+		}
+		return attachFileList;
 	}
 	/**
 	 * 전송상태로 변경
@@ -118,7 +152,7 @@ public class OhjicMailServiceImpl implements MailService {
 	
 	
 	@Override
-	public Object regist(String from, String fromName,String to, String toName, String subject, String textType, String text, String serverId, Date requestTime, String password   ) {
+	public Object regist(String from, String fromName,String to, String toName, String subject, String textType, String text, String serverId, Date requestTime, String password, String isReserved   ) {
 		
 		MsgQueue mq = new MsgQueue();
 		mq.setSendType("1");					// 1:비동보, 2:동부
@@ -131,6 +165,7 @@ public class OhjicMailServiceImpl implements MailService {
 		mq.setTextType(textType);				// 0:plain, 1:html
 		mq.setText(text);						// 이메일 내용
 		mq.setServerId(serverId);				// 서버 아이디
+		mq.setIsReserved(isReserved);			// 예약전송여부(0:일반전송, 1:예약전송)
 		if(requestTime!=null) {
 			mq.setRequestTime(requestTime);		// 요청시간
 		}
